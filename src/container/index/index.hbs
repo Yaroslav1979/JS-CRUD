@@ -5,19 +5,19 @@
 
 <div class="form">
   <h1 class="form__title">Створити користувача</h1>
-  <form action="">
+  <form method="POST" action="/user/create">
     <div class="form__content">
       <div class="form__field">
         <label for="email" class="form__label">Email адреса:</label>
-        <input type="email" name="email" classs="form__input">
+        <input type="email" name="email" class="form__input">
       </div>
       <div class="form__field">
         <label for="login" class="form__label">Нікнейм:</label>
-        <input type="login" name="login" classs="form__input">
+        <input type="login" name="login" class="form__input">
       </div>
       <div class="form__field">
-        <label for="pasword" class="form__label">Пароль входу:</label>
-        <input type="pasword" name="pasword" classs="form__input">
+        <label for="password" class="form__label">Пароль входу:</label>
+        <input type="password" name="password" class="form__input">
       </div>
       <button class="form__button">Створити</button>
     </div>

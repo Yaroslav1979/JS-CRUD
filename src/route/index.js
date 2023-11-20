@@ -21,5 +21,15 @@ router.get('/', function (req, res) {
 
 // ================================================================
 
+router.post('/user/create', function (req, res) {
+  console.log(req.body);
+
+  res.render('index', {
+   
+    style: 'index',
+  })
+  
+})
+
 // Підключаємо роутер до бек-енду
 module.exports = router
