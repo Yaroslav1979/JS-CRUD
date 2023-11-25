@@ -27,7 +27,7 @@ class User {
   }
 
   static getById = (id) => {
-    this.#list.find((user) => user.id === id)
+    return this.#list.find((user) => user.id === id)
   }
 
   static deleteById = (id) => {
@@ -64,9 +64,6 @@ class User {
     }
 
     
-  
-
-
 
 // ====================================================
 
@@ -137,7 +134,7 @@ router.get('/user-delete', function (req, res) {
 router.post('/user-update', function (req, res) {
   const {email, password, id} = req.body
 
-  const user = User.getById(Number(id))
+  const user = User.getById(Number(id));
 
   let result = false;
 
