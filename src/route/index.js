@@ -115,10 +115,7 @@ router.post('/user-create', function (req, res) {
 router.get('/user-delete', function (req, res) {
   const {id} = req.query
  
- 
-  User.deleteById(Number(id))
-
-  
+   User.deleteById(Number(id))
  
    res.render('success-info', {
     
