@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f0fdf0;
+  border: 1px solid #6cc591;
+  border-radius: 4px;
+  margin: 12px;
+  padding: 8px;
+}
+.card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card__title {
+  font-weight: 700;
+  color: green;
+}
+.card__info {
+  font-size: 14px;
+  color: #555;
+}
+.card__button {
+  padding: 8px;
+  align-self: center;
+  font-size: small;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.card__button--blue {
+  background-color: blue;
+  color: white;
+}
+
+/*# sourceMappingURL=style.css.map */
