@@ -1,0 +1,14 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.info__title {
+  font-size: 14px;
+  font-weight: 700;
+}
+.info__item {
+  padding: 8px;
+}
+
+/*# sourceMappingURL=style.css.map */
