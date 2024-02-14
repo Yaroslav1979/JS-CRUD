@@ -6,29 +6,36 @@
 <main class="main">
   {{#with data}}
   {{>heading title="Інформація про замовлення"}}
-    <a href="/purchase-info?id={{id}}" class="form-card">       
+    <a href="/purchase-item?id={{id}}" class="form-card">       
       <div class="data">
-          {{>info title="ID:" item='{{id}}' }}          
+         <div class="info">
+            {{!-- <span class="info__title">ID:: </span>
+            <span class="info__item"> {{id}} </span> --}}
+          </div>
+          {{!-- {{>info title="ID:" item='{{id}}'}} --}}
       {{>divider}}
         <div class="data__item">
-          {{>info title="Ім'я:" item=firstname }}          
-          {{>info title="Прізвище:" item='{{lastname}}'}}
+          <div class="info">
+            <p class="info__title">Ім'я:<span class="info__item"> {{firstname}} </span></p>
+          </div>
+          {{!-- {{>info title="Ім'я:" item='{{firstname}}'}}          
+          {{>info title="Прізвище:" item='{{lastname}}'}} --}}
         </div>
         <div class="data__item">
-          {{>info title="Телефон:" item="{{phone}}"}}
-          {{>info title="Електронна пошта" item="{{ema il}}"}}
+          {{!-- {{>info title="Телефон:" item="{{phone}}"}}
+          {{>info title="Електронна пошта" item="{{ema il}}"}} --}}
         </div>
       {{>divider}} <br>  
-        {{>info title="Назва товару" item="{{product}}"}} <br>
-        {{>info title="Коментар" item="coment"}}    
+        {{!-- {{>info title="Назва товару" item="{{product}}"}} <br>
+        {{>info title="Коментар" item="coment"}}     --}}
       {{>divider}}      
         <div class="data__item">
-          {{>info title="Вартість товарів" item="{{productPrice}}"}}
-          {{>info title="Вартість доставки" item="{{deliveryPrice}}"}}
+          {{!-- {{>info title="Вартість товарів" item="{{productPrice}}"}}
+          {{>info title="Вартість доставки" item="{{deliveryPrice}}"}} --}}
         </div>
         <div class="data__item">
-          {{>info title="Сума до сплати" item="{{totalPrice}}"}}
-          {{>info title="Нараховані бонуси" item="{{bonus}}"}}
+          {{!-- {{>info title="Сума до сплати" item="{{totalPrice}}"}}
+          {{>info title="Нараховані бонуси" item="{{bonus}}"}} --}}
         </div>
       {{>divider}}
       </div>
