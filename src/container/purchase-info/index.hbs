@@ -2,49 +2,74 @@
 Це код container файлу для index сторінки, 
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
  }}
-
 <main class="main">
   {{#with data}}
   {{>heading title="Інформація про замовлення"}}
     <a href="/purchase-item?id={{id}}" class="form-card">       
       <div class="data">
          <div class="info">
-            {{!-- <span class="info__title">ID:: </span>
-            <span class="info__item"> {{id}} </span> --}}
-          </div>
-          {{!-- {{>info title="ID:" item='{{id}}'}} --}}
+            <p class="info__title">ID:<span class="info__item"> {{id}} </span></p>
+          </div>         
       {{>divider}}
         <div class="data__item">
           <div class="info">
-            <p class="info__title">Ім'я:<span class="info__item"> {{firstname}} </span></p>
+            <p class="info__title">Ім'я:</p> 
+            <p class="info__item"> {{firstname}} </p>
           </div>
-          {{!-- {{>info title="Ім'я:" item='{{firstname}}'}}          
-          {{>info title="Прізвище:" item='{{lastname}}'}} --}}
+          <div class="info">
+            <p class="info__title">Прізвище:</p>
+            <p class="info__item">{{lastname}}</p>         
+          </div>
         </div>
         <div class="data__item">
-          {{!-- {{>info title="Телефон:" item="{{phone}}"}}
-          {{>info title="Електронна пошта" item="{{ema il}}"}} --}}
+          <div class="info">
+           <p class="info__title">Телефон:</p>
+           <p class="info__item"> {{phone}} </p>
+          </div>
+           <div class="info">
+            <p class="info__title">Електронна пошта:</p>
+            <p class="info__item"> {{email}} </p>
+          </div>
         </div>
-      {{>divider}} <br>  
-        {{!-- {{>info title="Назва товару" item="{{product}}"}} <br>
-        {{>info title="Коментар" item="coment"}}     --}}
-      {{>divider}}      
+      {{>divider}}  
         <div class="data__item">
-          {{!-- {{>info title="Вартість товарів" item="{{productPrice}}"}}
-          {{>info title="Вартість доставки" item="{{deliveryPrice}}"}} --}}
+          <div class="info">
+            <p class="info__title">"Назва товару:</p>
+            <p class="info__item"> {{product}} </p><br>
+          </div>
+          <div class="info">
+            <p class="info__title">Коментар:</p> 
+            <p class="info__item"> {{comment}} </p><br>
+          </div>
+        </div>
+        {{>divider}}      
+        <div class="data__item">
+          <div class="info">
+            <p class="info__title">Вартість товарів:</p>
+            <p class="info__item"> {{productPrice}} </p>
+          </div>
+          <div class="info">
+            <p class="info__title">Вартість доставки:</p>
+            <p class="info__item"> {{deliveryPrice}} </p>
+          </div>
         </div>
         <div class="data__item">
-          {{!-- {{>info title="Сума до сплати" item="{{totalPrice}}"}}
-          {{>info title="Нараховані бонуси" item="{{bonus}}"}} --}}
+          <div class="info">
+            <p class="info__title">Сума до сплати:</p>
+            <p class="info__item"> {{totalPrice}} </p>
+          </div>
+          <div class="info">
+            <p class="info__title">Нараховані бонуси:</p>
+            <p class="info__item"> {{bonus}} </p>
+          </div>
         </div>
-      {{>divider}}
       </div>
-      </a>
+      {{>divider}}
+      </div> 
+    </a>
      {{>button text="Змінити дані"}}    
   {{/with}} 
 </main>
-
-
 
 {{! 
     Цей код містить лише те, що буде виводитись в <body>

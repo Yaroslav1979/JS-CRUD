@@ -310,7 +310,7 @@ router.post('/purchase-submit', function (req, res) {
     lastname,
     phone,
     email,
-    coment,
+    comment,
 
     promocode,
     bonus,
@@ -414,7 +414,7 @@ router.post('/purchase-submit', function (req, res) {
     email,
 
     promocode,
-    coment,
+    comment,
     },
     product,
   )
@@ -456,27 +456,28 @@ router.get('/purchase-list', function (req, res) {
 router.get('/purchase-info', function (req, res) {  
   const id = Number(req.query.id) 
   const purchase = Purchase.getById(id)
-  // const bonus = Purchase.calcBonusAmount(
-  //   purchase.totalPrice,
-  // )
+  const bonus = Purchase.calcBonusAmount(
+    purchase.totalPrice,
+  )
   console.log('purchase:', id, purchase)
     // Отримати об'єкт замовлень
 
   // Рендеринг шаблону з отриманими даними
   res.render('purchase-info', {
-    // component: ['heading', 'info', 'purchase-item', 'divider'],
+    component: ['heading', 'info', 'purchase-item', 'divider'],
     style: 'purchase-info',
     data: {
-      id: 'purchase.id',      
+      id: purchase.id,      
       firstname: purchase.firstname,
-      lastaname: purchase.lastname,
+      lastname: purchase.lastname,
       phone: purchase.phone,
       email: purchase.email, 
       delivery: purchase.delivery,
-      product: purchase.product.title, 
+      product: purchase.product.title,
+      comment: purchase.comment,
       productPrice: purchase.productPrice, 
       deliveryPrice: purchase.deliveryPrice, 
-      // totalPrice: purchase.totalPrice,      
+      totalPrice: purchase.totalPrice,      
       bonus: bonus,
     },    
   });
