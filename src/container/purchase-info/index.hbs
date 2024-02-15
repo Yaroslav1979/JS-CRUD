@@ -3,13 +3,13 @@
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
  }}
 <main class="main">
-  {{#with data}}
-  {{>heading title="Інформація про замовлення"}}
-    <a href="/purchase-item?id={{id}}" class="form-card">       
+  {{#with data}}  
+    <div class="form-card"> 
+      {{>heading title="Інформація про замовлення"}}      
       <div class="data">
          <div class="info">
-            <p class="info__title">ID:<span class="info__item"> {{id}} </span></p>
-          </div>         
+            <p class="info__title">ID:<span class="info__item"> {{id}} </span></p> <br>
+        </div>         
       {{>divider}}
         <div class="data__item">
           <div class="info">
@@ -31,17 +31,17 @@
             <p class="info__item"> {{email}} </p>
           </div>
         </div>
-      {{>divider}}  
-        <div class="data__item">
+      {{>divider}}  <br>
+        
           <div class="info">
             <p class="info__title">"Назва товару:</p>
-            <p class="info__item"> {{product}} </p><br>
+            <p class="info__item"> {{product}} </p>
           </div>
           <div class="info">
             <p class="info__title">Коментар:</p> 
-            <p class="info__item"> {{comment}} </p><br>
+            <p class="info__item"> {{comment}} </p>
           </div>
-        </div>
+        
         {{>divider}}      
         <div class="data__item">
           <div class="info">
@@ -63,11 +63,10 @@
             <p class="info__item"> {{bonus}} </p>
           </div>
         </div>
-      </div>
-      {{>divider}}
-      </div> 
-    </a>
-     {{>button text="Змінити дані"}}    
+        {{>divider}}
+      </div>      
+      <a href="/purchase-item?id={{id}}" class="form-card">{{>button text="Змінити дані"}}</a> 
+    </div>      
   {{/with}} 
 </main>
 

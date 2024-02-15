@@ -241,8 +241,6 @@ router.post('/purchase-create', function (req, res) {
   const id = Number(req.query.id)
   const amount = Number(req.body.amount)
 
-  const product = Product.getById(id)
-
  
   if(amount < 1) {
    return res.render('alert', {
@@ -254,6 +252,8 @@ router.post('/purchase-create', function (req, res) {
      },
     })
   }
+
+  const product = Product.getById(id)
 
   if(product.amount < 1) {
     return res.render('alert', {
@@ -379,7 +379,7 @@ router.post('/purchase-submit', function (req, res) {
 
     console.log(bonusAmount)
 
-    if(bonus > bonusAmout) {
+    if(bonus > bonusAmount) {
       bonus = bonusAmount
     }
 
@@ -440,7 +440,7 @@ router.get('/purchase-list', function (req, res) {
 
   // Рендеринг шаблону з отриманими даними
   res.render('purchase-list', {
-    component: ['heading', 'purchase-item', 'divider'],
+    component: ['heading', 'purchase-list', 'divider'],
     title: 'Мої замовлення',
     style: 'purchase-list',
 
@@ -464,7 +464,7 @@ router.get('/purchase-info', function (req, res) {
 
   // Рендеринг шаблону з отриманими даними
   res.render('purchase-info', {
-    component: ['heading', 'info', 'purchase-item', 'divider'],
+    component: ['heading', 'purchase-info', 'divider'],
     style: 'purchase-info',
     data: {
       id: purchase.id,      
@@ -482,6 +482,28 @@ router.get('/purchase-info', function (req, res) {
     },    
   });
 });
+
+// -------------------------------------------------------
+
+router.get('/purchase-item', function (req, res) {
+  const id = Number(req.query.id)
+  const purchase = Purchase.updateById(id)
+
+  console.log (id, purchase)
+ 
+  res.render('purchase-item', {
+      style: 'purchase-item',
+       data: {
+        id: id,      
+        firstname: purchase.firstname,
+        lastname: purchase.lastname,
+        phone: purchase.phone,
+        email: purchase.email, 
+       },
+     })
+  // ↑↑ сюди вводимо JSON дані
+})
+
 //=========================================================
 // Підключаємо роутер до бек-енду
 module.exports = router
