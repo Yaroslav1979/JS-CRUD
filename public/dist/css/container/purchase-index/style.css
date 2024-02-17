@@ -5,18 +5,18 @@
 }
 .heading__title {
   font-size: 24px;
-  color: #000;
+  color: #222;
 }
 .heading__info {
   font-size: 16px;
-  color: #000;
+  color: #222;
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid;
+  border: 1px solid #808080;
   border-radius: 10px;
   gap: 12px;
   padding: 16px;
@@ -31,7 +31,7 @@
 }
 .product-card__subtitle {
   font-size: 16px;
-  color: gray;
+  color: #808080;
 }
 .product-card__category {
   padding: 5px 10px;
@@ -50,7 +50,7 @@
 }
 .product-card__button {
   background-color: blue;
-  color: white;
+  color: #ddd;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 4px;
@@ -63,7 +63,7 @@
 
 .button {
   background-color: blue;
-  color: white;
+  color: #ddd;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;

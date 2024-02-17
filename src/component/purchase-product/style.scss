@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid s.color('border1');
+    border: 1px solid s.color(border);
     border-radius: s.space(2.5);
     gap: s.space(3);
     padding: s.space(4);
@@ -21,14 +21,14 @@
         }
     &__subtitle {
         font-size: 16px;
-        color:gray;
+        color:s.color(border);
         }
             
     &__category {
         padding: 5px 10px;
         border-radius: 30px;
         font-size: 14px;
-        color: #222;
+        color: s.color(dark);
         border: 1px solid transparent;
         }
 
@@ -44,7 +44,7 @@
 
     &__button {
         background-color: blue;
-        color: white;
+        color: s.color(light);
         padding: 10px 20px;
         font-size: 16px;
         border-radius: s.space(1);

@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #f0fdf0;
+    background-color: s.color(light);
     border: 1px solid #6cc591;
     border-radius: s.space(1);
     margin: s.space(3);
@@ -22,7 +22,7 @@
         }
     &__info {
         font-size: 14px;
-        color:#555;
+        color:s.color(border);
         }
     
     &__button {
@@ -35,7 +35,7 @@
         
     &__button--blue {
         background-color: blue;
-        color: white;
+        color: s.color(light);
     }
     
 

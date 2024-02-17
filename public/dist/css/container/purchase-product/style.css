@@ -5,18 +5,18 @@
 }
 .heading__title {
   font-size: 24px;
-  color: #000;
+  color: #222;
 }
 .heading__info {
   font-size: 16px;
-  color: #000;
+  color: #222;
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid;
+  border: 1px solid #808080;
   border-radius: 10px;
   gap: 12px;
   padding: 16px;
@@ -31,7 +31,7 @@
 }
 .product-card__subtitle {
   font-size: 16px;
-  color: gray;
+  color: #808080;
 }
 .product-card__category {
   padding: 5px 10px;
@@ -50,7 +50,7 @@
 }
 .product-card__button {
   background-color: blue;
-  color: white;
+  color: #ddd;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 4px;
@@ -72,7 +72,7 @@
 }
 .field__input {
   padding: 8px;
-  border: 1px solid #999;
+  border: 1px solid #808080;
   border-radius: 10px;
 }
 .field--disabled {
@@ -83,12 +83,12 @@
 .product-info__divider {
   width: 100%;
   height: 1px;
-  background: #555;
+  background: #808080;
 }
 
 .button {
   background-color: blue;
-  color: white;
+  color: #ddd;
   border: none;
   border-radius: 10px;
   padding: 10px 20px;
@@ -130,12 +130,12 @@
 }
 .product-info__subtitle {
   font-size: 16px;
-  color: gray;
+  color: #808080;
 }
 .product-info__category {
   padding: 5px 10px;
   font-size: 14px;
-  color: black;
+  color: #222;
   border-radius: 30px;
   border: 1px solid transparent;
 }
@@ -149,7 +149,7 @@
 }
 .product-info__button {
   background-color: blue;
-  color: white;
+  color: #ddd;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;

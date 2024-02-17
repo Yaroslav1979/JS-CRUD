@@ -14,11 +14,11 @@
 }
 a {
     text-decoration: none;
-    color: black;
+    color:  s.color(dark);
 }
 
 .title {
-    color: gray;
+    color: s.color(border);
 }
 
 .purchase-item {

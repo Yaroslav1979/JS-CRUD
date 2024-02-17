@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #f0fdf0;
+  background-color: #ddd;
   border: 1px solid #6cc591;
   border-radius: 4px;
   margin: 12px;
@@ -19,7 +19,7 @@
 }
 .card__info {
   font-size: 14px;
-  color: #555;
+  color: #808080;
 }
 .card__button {
   padding: 8px;
@@ -30,7 +30,7 @@
 }
 .card__button--blue {
   background-color: blue;
-  color: white;
+  color: #ddd;
 }
 
 /*# sourceMappingURL=style.css.map */
