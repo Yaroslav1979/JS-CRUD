@@ -76,6 +76,7 @@ class Playlist {
       this.id = Math.floor(1000 + Math.random() * 9000) //генруємо випадкове id
       this.name = name
       this.tracks = []
+      this.image = 'https://picsum.photos/100/100'
     }
 
     static create(name) {
@@ -91,24 +92,48 @@ class Playlist {
     static makeMix(playlist) {
       const allTracks = Track.getList()
 
-      let rendomTracks = allTracks.sort(() => 0.5-Math.random()).slice(0, 3)
+      let randomTracks = allTracks
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3)
 
-      playlist.tracks.push(...rendomTracks)
+      playlist.tracks.push(...randomTracks)
+    }
+
+    static getById(id) {
+      return (
+        Playlist.#list.find(
+          (playlist) => playlist.id === id
+          ) || null
+      )
+    }
+
+    deleteTrackById(trackId) {
+      this.tracks = this.tracks.filter(
+        (track) => track.id !== trackId,
+      )
+    }
+
+    static findListByValue(name) {
+      return this.#list.filter((playlist) =>
+        playlist.name.toLowerCase().includes(name.toLowerCase()),
+      )
     }
 }
+
+Playlist.makeMix(Playlist.create('Test1'))
+Playlist.makeMix(Playlist.create('Test2'))
+Playlist.makeMix(Playlist.create('Test3'))
 
 //============================================================
 
 
-router.get('/', function (req, res) {
+router.get('/spotify-choose', function (req, res) {
 
   res.render('spotify-choose', {
 
      style: 'spotify-choose',
 
-    data: {
-      // list: Product.getList(),
-    },
+    data: {},
   })
   // ↑↑ сюди вводимо JSON дані
 })
@@ -120,7 +145,6 @@ router.get('/spotify-create', function (req, res) {
   console.log (isMix)
   
   res.render('spotify-create', {
-
      style: 'spotify-create',
 
     data: {
@@ -133,14 +157,13 @@ router.get('/spotify-create', function (req, res) {
 router.post('/spotify-create', function (req, res) {
 
   const isMix = !!req.query.isMix
-
   const name = req.body.name
 
   if (!name) {
     return res.render('alert', {
       style: 'alert',
       data: {
-        message: 'Error',
+        message: 'Помилка',
         info: 'Введіть назву плейлиста!',
         link: isMix ? '/spotify-create?isMix=true':'/spotify-create',
       }
@@ -155,13 +178,17 @@ router.post('/spotify-create', function (req, res) {
 
   console.log (playlist)
 
-  res.render('alert', {
-    style: 'alert',
+  res.render('spotify-playlist', {
+    style: 'spotify-playlist',
     data: {
-      message: 'Успішно!',
-      info: 'Плейлист створено',
-      link: `/spotify-playlist?id=${playlist.id}`,
-    }
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+
+      // message: 'Успішно!',
+      // info: 'Плейлист створено',
+      // link: `/spotify-playlist?id=${playlist.id}`,
+    },
   })  
 })
 
@@ -169,14 +196,14 @@ router.post('/spotify-create', function (req, res) {
 
 router.get('/spotify-playlist', function (req, res) {
   const id = Number(req.query.id)
-  const playlist = Playlist.create(id)
+  const playlist = Playlist.getById(id)
 
  if (!playlist) {
   return res.render('alert', {
     style: 'alert',
     data: {
-      message: 'Error',
-      info: 'Такого плейлиста не знайдено!',
+      message: 'Помилка!',
+      info: 'Такого плейлиста не знайдено',
       link: '/',
     }
   })
@@ -189,12 +216,80 @@ res.render('spotify-playlist', {
     tracks: playlist.tracks,
     name: playlist.name,
   }
+  })  
 })
 
-  // ↑↑ сюди вводимо JSON дані
+//---------------------------------------------
+
+router.get('/spotify-track-delete', function (req, res) {
+  const playlistId = Number(req.query.playlistId);
+  const trackId = Number(req.query.trackId);
+
+  const playlist = Playlist.getById(playlistId);
+
+  if (!playlist) {
+    return res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка!',
+        info: 'Такого плейлиста не знайдено',
+        link: `/spotify-playlist?id=${playlistId}`, 
+      },
+    })
+  }
+
+  playlist.deleteTrackById(trackId);
+
+  res.render('spotify-playlist', {
+    style: 'spotify-playlist',
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    },
+  })
+})
+//------------------------------------------------------------------
+
+router.get('/spotify-search', function (req, res) {
+  const value = ''
+ 
+  const list = Playlist.findListByValue(value)
+
+   res.render('spotify-search', {
+    style: 'spotify-search',
+
+    data: {
+     list: list.map(({ tracks, ...rest}) => ({
+      ...rest,
+      amount: tracks.length,
+     })),
+     value,
+    },
+  })
 })
 
+router.post('/spotify-search', function (req, res) {
+  const value = req.body.value || ''
+ 
+  const list = Playlist.findListByValue(value)
 
+  console.log (value)
+
+   res.render('spotify-search', {
+    style: 'spotify-search',
+
+    data: {
+     list: list.map(({ tracks, ...rest}) => ({
+      ...rest,
+      amount: tracks.length,
+     })),
+     value,
+    },
+  })
+})
+
+// ↑↑ сюди вводимо JSON дані
 //=========================================================
 // Підключаємо роутер до бек-енду
 module.exports = router

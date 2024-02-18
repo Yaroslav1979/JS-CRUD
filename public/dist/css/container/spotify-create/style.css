@@ -29,6 +29,9 @@ a:hover {
 .title--center {
   text-align: center;
 }
+.title--small {
+  font-size: 16px;
+}
 
 .track {
   display: grid;
@@ -50,14 +53,81 @@ a:hover {
   font-size: 24px;
   color: #ddd;
 }
+.track__author {
+  font-size: 16px;
+  color: gray;
+}
 
-.add-button {
+.playlist {
   display: grid;
   grid-template-columns: 92px 1fr;
+  gap: 28px;
   align-items: center;
-  gap: 24px;
+}
+.playlist__list {
+  display: grid;
+  gap: 28px;
+}
+.playlist__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.playlist__name {
+  font-size: 24px;
   color: #ddd;
-  font-size: 18px;
+}
+.playlist__amount {
+  font-size: 16px;
+  color: gray;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.choose {
+  display: grid;
+  gap: 24px;
+}
+.choose__item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+}
+.choose__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.choose__text {
+  font-size: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+.form__field {
+  width: 100%;
+  font-size: 50px;
+  color: #ddd;
+  text-align: center;
+  padding: 16px;
+  border-bottom: 1px solid #808080;
+}
+.form__button {
+  background-color: #6cc591;
+  border-radius: 16px;
+  padding: 8px 20px;
+  transition: opacity 0.5s;
+}
+.form__button:hover {
+  opacity: 0.7;
 }
 
 /*# sourceMappingURL=style.css.map */
