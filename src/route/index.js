@@ -127,7 +127,7 @@ Playlist.makeMix(Playlist.create('Test3'))
 //============================================================
 
 
-router.get('/spotify-choose', function (req, res) {
+router.get('/', function (req, res) {
 
   res.render('spotify-choose', {
 
