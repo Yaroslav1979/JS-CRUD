@@ -43,6 +43,7 @@ a {
     grid-template-columns: 92px 1fr 42px;
     gap: s.space(7);
     align-items: center;
+    margin: s.space(3);
 
     &__list {
         display: grid;
@@ -63,7 +64,11 @@ a {
 
     &__author {
         font-size: 16px;
-        color: gray;
+        color: s.color(light);
+    }
+
+    &__image {
+        border-radius: s.space(2);
     }
  }
 
@@ -93,7 +98,7 @@ a {
 
     &__amount {
         font-size: 16px;
-        color: gray;
+        color: s.color(border);
         }
      }
 

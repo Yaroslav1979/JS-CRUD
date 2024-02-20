@@ -87,4 +87,21 @@ a:hover {
   color: #808080;
 }
 
-/*# sourceMappingURL=spotify.css.map */
+.main__content--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  justify-content: center;
+  background-color: #222;
+  padding: 24px;
+  color: #ddd;
+}
+.main__content--gray {
+  background-color: #373737;
+  width: 50%;
+  padding: 4px;
+}
+
+/*# sourceMappingURL=style.css.map */

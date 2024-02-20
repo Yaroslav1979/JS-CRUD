@@ -28,7 +28,6 @@ class Track {
     return this.#list.reverse()
   }
 }
-
 Track.create(
   'Nachtigal',
   'Кому вниз',
@@ -62,8 +61,8 @@ Track.create(
 Track.create(
   'Фортеця Бахмут',
   'Антитіла',
-  'https://picsum.photos/100/100',
-)
+  'https://picsum.photos/100/100',)
+ 
 
 console.log (Track.getList())
 
@@ -103,7 +102,8 @@ class Playlist {
       return (
         Playlist.#list.find(
           (playlist) => playlist.id === id
-          ) || null
+          )
+          //  || null
       )
     }
 
@@ -118,6 +118,11 @@ class Playlist {
         playlist.name.toLowerCase().includes(name.toLowerCase()),
       )
     }
+
+    static addTrack(trackId) {
+      Track.getList().find((track) => track.id === trackId);
+      this.tracks.push(trackToAdd)      
+    }  
 }
 
 Playlist.makeMix(Playlist.create('Test1'))
@@ -127,7 +132,7 @@ Playlist.makeMix(Playlist.create('Test3'))
 //============================================================
 
 
-router.get('/spotify-choose', function (req, res) {
+router.get('/', function (req, res) {
 
   res.render('spotify-choose', {
 
@@ -135,7 +140,7 @@ router.get('/spotify-choose', function (req, res) {
 
     data: {},
   })
-  // ↑↑ сюди вводимо JSON дані
+ 
 })
 
 //=========================================================
@@ -151,7 +156,7 @@ router.get('/spotify-create', function (req, res) {
       isMix
     },
   })
-  // ↑↑ сюди вводимо JSON дані
+  
 })
 // -------------------------------------------------------------
 router.post('/spotify-create', function (req, res) {
@@ -184,10 +189,6 @@ router.post('/spotify-create', function (req, res) {
       playlistId: playlist.id,
       tracks: playlist.tracks,
       name: playlist.name,
-
-      // message: 'Успішно!',
-      // info: 'Плейлист створено',
-      // link: `/spotify-playlist?id=${playlist.id}`,
     },
   })  
 })
@@ -249,7 +250,55 @@ router.get('/spotify-track-delete', function (req, res) {
     },
   })
 })
+
+//-----------------------------------------------------------
+router.get('/spotify-add-track', function (req, res) {   
+  const playlistId = Number(req.query.playlistId)
+  const playlist = Playlist.getById(playlistId)
+  const allTracks = Track.getList()
+
+  console.log(playlistId, allTracks,)
+
+res.render('spotify-add-track', {
+  style: 'spotify-add-track',
+  data: {
+    playlistId,  
+    tracks: allTracks,   
+  }
+  })  
+})
 //------------------------------------------------------------------
+router.post('/spotify-add-track', function (req, res) {
+  const playlistId = Number(req.query.playlistId)
+  const trackId = Number(req.body.trackId) 
+
+  const playlist = Playlist.getById(playlistId)  
+  
+  Playlist.addTrack(trackId)
+
+if (!trackToAdd) {
+  return res.render('alert', {
+    style: 'alert',
+    data: {
+      message: 'Помилка!',
+      info: 'Такого треку не знайдено',
+      link: `/spotify-add-track?playlistId=${playlistId}`,
+    },
+  })
+}
+res.render('spotify-playlist', {
+  style: 'spotify-playlist',
+  data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    }
+  })  
+})
+
+//--------------------------------------
+
+
 
 router.get('/spotify-search', function (req, res) {
   const value = ''

@@ -1,0 +1,34 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../lib/spotify.scss' as spotify;
+
+
+.main__content {
+
+    &--center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+        justify-content: center;
+        background-color: s.color(dark);
+        padding: s.space(6);   
+        color: s.color(light); 
+    }
+
+    &--gray {
+        background-color: #373737;
+        width: 50%;
+        padding: s.space(1);  
+    }
+}
+
+
+
+
+
+
+
+
+
