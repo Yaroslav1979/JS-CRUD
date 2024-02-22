@@ -7,12 +7,14 @@ a:hover {
   opacity: 0.6;
 }
 
+body {
+  background-color: #222;
+}
+
 .main {
   display: flex;
   justify-content: center;
-  background-color: #222;
   padding: 24px 8px;
-  height: 100%;
   color: #ddd;
 }
 .main__content {
@@ -67,6 +69,7 @@ a:hover {
   grid-template-columns: 92px 1fr;
   gap: 28px;
   align-items: center;
+  margin-bottom: 12px;
 }
 .playlist__list {
   display: grid;

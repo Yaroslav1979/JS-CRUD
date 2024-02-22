@@ -2,9 +2,6 @@
 
 @use '../../lib/spotify.scss' as spotify;
 
-
-
-
 .add-button {
     display: grid;
     grid-template-columns: 92px 1fr;
@@ -13,12 +10,3 @@
     color: s.color(light);
     font-size: 18px;
 }
-
-
-
-
-
-
-
-
-

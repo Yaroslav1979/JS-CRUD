@@ -10,12 +10,16 @@ a {
     }
 }
 
+body {
+    background-color: s.color(dark);
+}
+
 .main {
     display: flex; 
     justify-content: center;
-    background-color: s.color(dark);
+   
     padding: s.space(6) s.space(2);
-    height: 100%;
+   
     color: s.color(light); 
     
     &__content {
@@ -72,12 +76,12 @@ a {
     }
  }
 
-
  .playlist {
     display: grid;
     grid-template-columns: 92px 1fr;
     gap: s.space(7);
     align-items: center;
+    margin-bottom: s.space(3);
 
     &__list {
         display: grid;

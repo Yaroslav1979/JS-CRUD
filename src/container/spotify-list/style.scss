@@ -1,0 +1,27 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../lib/spotify.scss' as spotify;
+
+
+.header {
+    display: flex;
+    justify-content: space-between;  
+    color: s.color(light);
+    font-size: 24px;
+    width: 80%;
+    
+    &__buttons {
+        display: flex;
+        gap: 12px;
+        cursor: pointer;
+        // color: s.color(light);
+        // transition: opacity 0.5s;
+
+        // &:hover {
+        //     opacity: 0.7s;            
+        // }
+    }
+    &__button {       
+        cursor: pointer;
+    }
+}

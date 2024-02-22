@@ -119,10 +119,10 @@ class Playlist {
       )
     }
 
-    static addTrack(trackId) {
-      Track.getList().find((track) => track.id === trackId);
-      this.tracks.push(trackToAdd)      
-    }  
+    // static addTrack(trackId) {
+    //   Track.getList().find((track) => track.id === trackId);
+    //   this.tracks.push(trackToAdd)      
+    // }  
 }
 
 Playlist.makeMix(Playlist.create('Test1'))
@@ -256,24 +256,37 @@ router.get('/spotify-add-track', function (req, res) {
   const playlist = Playlist.getById(playlistId)
   const allTracks = Track.getList()
 
-  console.log(playlistId, allTracks,)
+  // console.log(playlistId, allTracks,)
 
 res.render('spotify-add-track', {
   style: 'spotify-add-track',
   data: {
-    playlistId,  
+    playlistId: playlist.id,  
     tracks: allTracks,   
-  }
+  },
   })  
 })
 //------------------------------------------------------------------
 router.post('/spotify-add-track', function (req, res) {
-  const playlistId = Number(req.query.playlistId)
+  const playlistId = Number(req.body.playlistId)
   const trackId = Number(req.body.trackId) 
 
   const playlist = Playlist.getById(playlistId)  
   
-  Playlist.addTrack(trackId)
+  if (!playlist) {
+  return res.render('alert', {
+    style: 'alert',
+    data: {
+      message: 'Помилка',
+      info: 'Такого плейліста не знайдено',
+      link: `/spotify-playlist?id=${playlistId}`,
+    },
+  })
+}
+const trackToAdd = Track.getList().find(
+  (track) => track.id === trackId,
+)
+  // Playlist.addTrack(trackId)
 
 if (!trackToAdd) {
   return res.render('alert', {
@@ -285,19 +298,20 @@ if (!trackToAdd) {
     },
   })
 }
+
+playlist.tracks.push(trackToAdd)
+
 res.render('spotify-playlist', {
   style: 'spotify-playlist',
   data: {
-      playlistId: playlist.id,
-      tracks: playlist.tracks,
+      playlistId: playlist.id,    
+      tracks: playlist.tracks.reverse(),
       name: playlist.name,
     }
   })  
 })
 
 //--------------------------------------
-
-
 
 router.get('/spotify-search', function (req, res) {
   const value = ''
@@ -336,6 +350,35 @@ router.post('/spotify-search', function (req, res) {
     },
   })
 })
+
+//-----------------------------------------------
+
+router.get('/spotify-list', function (req, res) {
+  // const id = Number(req.query.id)
+  // const playlist = Playlist.getById(id)
+
+//  if (!playlist) {
+//   return res.render('alert', {
+//     style: 'alert',
+//     data: {
+//       message: 'Помилка!',
+//       info: 'Такого плейлиста не знайдено',
+//       link: '/',
+//     }
+//   })
+// }
+
+res.render('spotify-list', {
+  style: 'spotify-list',
+  data: {
+    name: 'Моя бібліотека',
+    // playlistId: playlist.id,
+    // tracks: playlist.tracks,
+    // name: playlist.name,
+  }
+  })  
+})
+
 
 // ↑↑ сюди вводимо JSON дані
 //=========================================================

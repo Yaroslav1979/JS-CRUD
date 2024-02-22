@@ -1,22 +1,25 @@
-{{! 
-Це код container файлу для index сторінки, 
-в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
- }}
+
 <main class="main__content--center">  
  {{#with data}} 
-  <h1 class="title ">Додати до плейлиста</h1>
+  <h1 class="title">Додати до плейлиста</h1>
   <div class="main__content main__content--gray">
     <ul class="track-list ">
       {{#each tracks}}
       <li class="track">
-        <img src="{{image}}" alt="{{name}}" width=100px class="track__image">
+        <img src="{{image}}" alt="{{name}}" class="track__image">
         <div class="track__content">
           <strong class="track__name">{{name}} </strong>
           <em class="track__author">{{author}} </em>
         </div>
-        <a href="/spotify-add-track?playlistId={{../playlistId}}&trackId={{id}}">
-        <img src="/svg/Group 1001.svg" alt="add">
-        </a>
+
+        <form action="/spotify-add-track" method="POST">
+          <input type="hidden" name="playlistId" value="{{../playlistId}}">
+          <input type="hidden" name="trackId" value="{{id}}">
+          <button type="submit">
+              <img src="/svg/Group 1001.svg" alt="add">
+          </button>
+        </form> 
+               
       </li>
       {{/each}}
     </ul> 

@@ -90,4 +90,20 @@ body {
   color: #808080;
 }
 
-/*# sourceMappingURL=spotify.css.map */
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: #ddd;
+  font-size: 24px;
+  width: 80%;
+}
+.header__buttons {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+}
+.header__button {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */
