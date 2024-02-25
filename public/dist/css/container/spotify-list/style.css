@@ -106,4 +106,30 @@ body {
   cursor: pointer;
 }
 
+.cards-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  display: grid;
+}
+.card__image {
+  width: 250px;
+  border-radius: 20px;
+}
+.card__content {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card__amount {
+  font-size: 16px;
+}
+.card__name {
+  font-size: 20px;
+}
+
 /*# sourceMappingURL=style.css.map */

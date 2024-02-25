@@ -68,7 +68,7 @@ console.log (Track.getList())
 
 //----------------------------------
 class Playlist {
-    //Статичне приватне поле для зберігання списку об'єкту track
+    //Статичне приватне поле для зберігання списку об'єкту playlist
     static #list = []
 
     constructor(name) {
@@ -76,6 +76,7 @@ class Playlist {
       this.name = name
       this.tracks = []
       this.image = 'https://picsum.photos/100/100'
+      
     }
 
     static create(name) {
@@ -103,7 +104,7 @@ class Playlist {
         Playlist.#list.find(
           (playlist) => playlist.id === id
           )
-          //  || null
+           || null
       )
     }
 
@@ -118,11 +119,7 @@ class Playlist {
         playlist.name.toLowerCase().includes(name.toLowerCase()),
       )
     }
-
-    // static addTrack(trackId) {
-    //   Track.getList().find((track) => track.id === trackId);
-    //   this.tracks.push(trackToAdd)      
-    // }  
+    
 }
 
 Playlist.makeMix(Playlist.create('Test1'))
@@ -286,7 +283,6 @@ router.post('/spotify-add-track', function (req, res) {
 const trackToAdd = Track.getList().find(
   (track) => track.id === trackId,
 )
-  // Playlist.addTrack(trackId)
 
 if (!trackToAdd) {
   return res.render('alert', {
@@ -353,28 +349,29 @@ router.post('/spotify-search', function (req, res) {
 
 //-----------------------------------------------
 
-router.get('/spotify-list', function (req, res) {
-  // const id = Number(req.query.id)
-  // const playlist = Playlist.getById(id)
 
-//  if (!playlist) {
-//   return res.render('alert', {
-//     style: 'alert',
-//     data: {
-//       message: 'Помилка!',
-//       info: 'Такого плейлиста не знайдено',
-//       link: '/',
-//     }
-//   })
-// }
+
+router.get('/spotify-list', function (req, res) {
+  const value = ''
+    
+  const list = Playlist.findListByValue(value)
+  const listPlaylist = Playlist.getList()
+
+  console.log('spotify-list:', listPlaylist, )  
+
 
 res.render('spotify-list', {
   style: 'spotify-list',
   data: {
     name: 'Моя бібліотека',
-    // playlistId: playlist.id,
-    // tracks: playlist.tracks,
-    // name: playlist.name,
+
+    playlists: listPlaylist,
+    
+    list: list.map(({ tracks, ...rest}) => ({
+     ...rest,
+     amount: tracks.length,
+    })),
+    value,     
   }
   })  
 })

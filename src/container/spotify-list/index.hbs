@@ -5,21 +5,25 @@
 <div class="header">
     <h1 class="title title--center">{{name}}</h1>
     <div class="header__buttons"> 
-      <img src="/svg/cross_add.svg" width="20px" alt="add" class="header__button">
-      <img src="svg/spotify-search.svg" alt="search" width="20px" class="header__button">
+      <a href="/">
+        <img src="/svg/cross_add.svg" width="20px" alt="add" class="header__button">
+      </a>
+      <a href="/spotify-search">
+        <img src="svg/spotify-search.svg" alt="search" width="20px" class="header__button">
+      </a>
     </div>
 </div>
     
     <ul class="cards-list">
-      {{#each tracks}}
+      {{#each playlists}}
       <li class="card">
-        <a href="/spotify-track-delete?playlistId={{../playlistId}}
-        &trackId={{id}}">
-        <img src="{{image}}" alt="{{name}}" class="track__image">
+        <a href="/spotify-playlist"?playlistId={{../playlistId}}&trackId={{id}}
+        >
+         <img src="{{image}}" alt="{{name}}" class="card__image">
         <div class="card__content">
           <strong class="card__name">{{name}} </strong>
-          <em class="card__amount">{{amount}} </em>
-        </div> 
+          <p class="card__amount">Кількість пісень: {{../list.amount}} </p>
+        </div>  
         </a>
       </li>
       {{/each}}
