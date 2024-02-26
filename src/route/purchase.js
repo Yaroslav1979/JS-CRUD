@@ -149,12 +149,11 @@ class Purchase {
 
           return newPurchase
         }
-// --------------------------------------------
+
         static getList = () => {
           return Purchase.#list.reverse()          
         }
 
-// -------------------------------
         static getById = (id) => {
           return Purchase.#list.find((item) => item.id === id)
         }
