@@ -19,8 +19,8 @@ class Product {
 
   }
 //Статичний метод для створення об'єкту Product і додавання його до списку #list
-  static create(name, price, description) {
-    const newProduct = new Product(name, price, description)
+  static create(name, price, description, id) {
+    const newProduct = new Product(name, price, description, id)
     this.#list.push(newProduct)
     return newProduct
   }
@@ -76,68 +76,53 @@ class Product {
 //============================================================
 
 
-// router.get('/', function (req, res) {
+router.get('/', function (req, res) {
 
-//   res.render('spotify-choose', {
+  res.render('product-list', {
 
-//      style: 'spotify-choose',
+     style: 'product-list',
 
-//     data: {},
-//   })
+    data: {},
+  })
  
-// })
+})
 
 //=========================================================
-router.get('/product-create', function (req, res) {
-  const id = Number(req.query.id)
-  const name = req.query.name
-  const price = Number(req.query.price)
-  const description =  req.query.description
-  const productList = Product.getList();
-  // console.log (isMix)
-  
-  res.render('product-create', {
-    style: 'product-create',
-    data: {
-      productList,
-    },
-  })
-  
-})
+
 // -------------------------------------------------------------
 
-
-  
+ 
   router.post('/product-create', function (req, res) {
-    const id = Number(req.query.id)
-    const name = req.body.name;
-    const price = Number(req.body.price);
-    const description = req.body.description;
+    const id = Number(req.body.id)
+    const {name, price, description} = req.body;
+    // const price = Number(req.body.price);
+    // const description = req.body.description;
   
-    if (!name) {
-      return res.render('container/alert', {
+    if (!name, !price, !description) {
+      return res.render('alert', {
         style: 'alert',
-        data: {
+        data: {          
           message: 'Помилка',
-          info: 'Введіть назву товару',
+          info: "Введіть обов'язкові дані",
           link: '/product-create',
         }
       });
     }
   
-    const product = Product.create(name, price, description);
+    const product = Product.create(name, price, description, id);
   
     if (product) {
-      return res.render('container/alert', {
+      return res.render('alert', {
         style: 'alert',
         data: {
           message: 'Успіх',
           info: 'Товар успішно створено',
-          link: '/product-create',
+          link: '/product-list',
+          
         }
       });
     } else {
-      return res.render('container/alert', {
+      return res.render('alert', {
         style: 'alert',
         data: {
           message: 'Помилка',
@@ -148,7 +133,44 @@ router.get('/product-create', function (req, res) {
     }
   });
 
-//----------------------------------
+//------------------------------------------------------
+router.get('/product-create', function (req, res) {
+  const id = Number(req.query.id)
+  const name = req.body.name
+  const price = Number(req.body.price)
+  const description =  req.body.description
+  
+  const product = Product.create(name, price, description, id)
+  
+  res.render('product-create', {
+    style: 'product-create',
+    data: {
+      product,
+    },
+  })  
+})
+
+//------------------------------------------------
+
+
+router.get('/product-list', function (req, res) {
+  const id = Number(req.query.id)
+  const name = req.body.name
+  const price = Number(req.body.price)
+  const description =  req.body.description
+  const productList = Product.getList(name, price, description, id);
+
+  
+  res.render('product-list', {
+    style: 'product-list',
+    data: {
+      productList,
+    },
+  })
+  
+})
+//----------------------------------------------------------
+
 
 // router.get('/spotify-playlist', function (req, res) {
 //   const id = Number(req.query.id)
