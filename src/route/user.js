@@ -42,8 +42,6 @@ class User {
       }
   }
 
- 
-
   static updateById = (id, data) => {
     const user = this.getById(id);
 
@@ -56,12 +54,12 @@ class User {
       }
       }
 
-      static update = (user, {email} ) => {
-        if (email) {
-          user.email = email
-        }
-      }
+  static update = (user, {email} ) => {
+    if (email) {
+      user.email = email
     }
+  }
+}
 
     
 

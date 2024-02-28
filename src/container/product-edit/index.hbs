@@ -1,37 +1,38 @@
-{{! 
-Це код container файлу для index сторінки, 
-в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
- }}
 
 <main>
   <section>
     
-    <h1 class="title title--center">Створення товару</h1>
+    <h1 class="title title--center">Редагування товару</h1>
 
-    <form method="POST" action="/product-create">
-    <h2 class="title--small">Інформація про товар:</h2>
+    <form method="POST" action="/product-edit">
+        <h2 class="title--small">Інформація про товар:</h2>
         <div class="form__content">
-
           <div class="form__field">
             <label for="name" class="form__label">Назва товару:</label>
-            <input type="name" name="name" class="form__input">
+            <input type="name" name="name" class="form__input" value="{{product.name}}">
           </div>
-
           <div class="form__field">
             <label for="price" class="form__label">Ціна:</label>
-            <input type="price" name="price" class="form__input">
+            <input type="number" name="price" class="form__input" value="{{product.price}}">
           </div>
-
+           <div class="form__field">
+            <label for="id" class="form__label">ID:</label>
+            <input type="number" name="id" class="form__input" value="{{product.id}}">
+          </div>
+          </div>
           <div class="form__field">
             <label for="description" class="form__label">Короткий опис товару:</label>
-            <input type="description" name="description" class="form__input">
+            <input type="text" name="description" class="form__input" value="{{product.description}}">
           </div>
-
-          <em class="form__explain">Відображається у картці товару</em>
-          
-          <button class="form__button" type="submit">Створити товар</button>
-          
-        </div>
+          <p class="form__explain">Відображається у картці товару</p>
+          <div class="form__content">
+            <a href="/product-edit?id={{product.id}}" class="form__button">
+              <button class="form__btn" type="submit" >Зберегти оновлення</button>
+            </a>
+            <a href="/product-delete?id={{product.id}}" class="form__button form__button--red">
+             <button class="form__btn">Видалити товар</button>
+            </a>
+          </div>
       </form>
    
    
