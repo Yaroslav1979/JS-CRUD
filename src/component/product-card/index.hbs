@@ -1,26 +1,24 @@
-{{#with productList}}
- 
-   {{#each product}}
+{{#with data.products}}
+
+{{#if isEmpty}} 
+<mark> Пустий </mark>
+
+    {{#each productList}}
     <div class="product-card">
-    <h2 class="product-card__title">
-      Стильна сукня{{name}}</h2>
-    <p class="product-card__descr">
-      Елегантна сукня з натуральної тканини {{description}}</p>
+    <h2 class="product-card__title">{{name}}</h2>
+    <p class="product-card__descr">{{description}}</p>
     <p class="product-card__id">ID: {{id}}</p>
 
     <div class="product-card__wrapper">
-      <p class="product-card__price">1500 {{price}} грн </p>
-      <a href="/product-edit?id={{id}}" 
-      class="product-card__button">
+      <p class="product-card__price">{{price}} грн </p>
+      <button class="product-card__button">
+        <a href="/product-edit?id={{id}}" 
+      >
         {{>button text="Редагувати"}}
-      </a>
+      </a></button>
     </div> 
     </div>                         
-    {{/each}}
-    {{!-- {{#each category}}
-    <span class="product-card__category product-card__category--{{id}}">{{text}}</span>
-    {{/each}} --}}
-   
-  
+    {{/each}}    
+  {{/if}}
   {{/with}}
 

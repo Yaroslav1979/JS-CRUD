@@ -36,9 +36,7 @@
 
     &__button {
         display: flex;
-        justify-content: center;
-        text-decoration: none;
-        border: 1px solid s.color('light');
+        justify-content: center;        
         padding: s.space(2);
         border-radius: 20px;
         background-color: blue;
@@ -52,6 +50,7 @@
 
     &__btn {
         color: white;
+        text-decoration: none;
     }
 
     &__explain {

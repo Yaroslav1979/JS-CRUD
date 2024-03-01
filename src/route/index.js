@@ -11,11 +11,13 @@ class Product {
   static #list = []
 
   constructor(name, price, description) {
-    this.id = Math.floor(Math.random() * 10000) //генруємо випадкове id
-    this.createDate = new Date().toISOString();
     this.name = name
     this.price = price
-    this.description = description
+    this.description = description    
+    this.id = Math.floor(Math.random() * 10000) //генруємо випадкове id
+    this.createDate = () => {
+      this.date = new Date().toISOString()};
+    
 
   }
 //Статичний метод для створення об'єкту Product і додавання його до списку #list
@@ -30,34 +32,32 @@ class Product {
     return this.#list.reverse()
   }
 
-  static add = (...data) => {
-    const newProduct = new Product(...data)
+  checkId = (id) => this.id === id
 
-    this.#list.push(newProduct)
+  static add = (product) => { 
+    this.#list.push(product)
   }
 
   static getById = (id) => {
     return this.#list.find((product) => product.id === id)
   }
 
-  static updateById = (id) => {
+  static updateById = (id, data) => {
     const product = this.getById(id);
-
+    const {name} = data
     if (product) {
-      this.update(product)
-
+      if(name) {
+        product.name = name
+      }   
         return true
       } else {
         return false
       }
       }
 
-  static update = (product, {name, price, description} ) => {
-    if (product) {
-      product.id = id
-       product.name = name
-       product.price = price
-       product.description = description
+  static update = (name, {product} ) => {
+    if (name) {      
+       product.name = name      
      }
    }
 
@@ -95,7 +95,24 @@ router.get('/', function (req, res) {
 })
 
 //=========================================================
+router.get('/product-create', function (req, res) {
 
+  const list = Product.getList()
+
+  // const id = Number(req.query.id)
+  // const name = req.body.name
+  // const price = Number(req.body.price)
+  // const description =  req.body.description
+  
+  // const product = Product.create(name, price, description, id)
+  
+  res.render('product-create', {
+    style: 'product-create',
+    data: {
+      list,
+    },
+  })  
+})
 // -------------------------------------------------------------
 
  
@@ -104,7 +121,10 @@ router.get('/', function (req, res) {
     const {name, price, description} = req.body;
     // const price = Number(req.body.price);
     // const description = req.body.description;
-  
+    const product = new Product(name, price, description)
+    Product.add(product)
+    console.log(Product.getList())
+
     if (!name || !price || !description) {
       return res.render('alert', {
         style: 'alert',
@@ -115,9 +135,7 @@ router.get('/', function (req, res) {
         }
       });
     }
-  
-    const product = Product.create(name, price, description, id);
-
+    
     
     if (product) {
       return res.render('alert', {
@@ -142,40 +160,21 @@ router.get('/', function (req, res) {
   });
 
 //------------------------------------------------------
-router.get('/product-create', function (req, res) {
-  const id = Number(req.query.id)
-  const name = req.body.name
-  const price = Number(req.body.price)
-  const description =  req.body.description
-  
-  const product = Product.create(name, price, description, id)
-  
-  res.render('product-create', {
-    style: 'product-create',
-    data: {
-      product,
-    },
-  })  
-})
+
 
 //------------------------------------------------
 
 
 router.get('/product-list', function (req, res) {
-  const id = Number(req.query.id)
-  const name = req.body.name
-  const price = Number(req.body.price)
-  const description =  req.body.description
-  const product = Product.create(name, price, description, id)
+
   const productList = Product.getList();
 
-  
-  res.render('product-list', {
+    res.render('product-list', {
     component: ['button', 'product-card', 'divider'],
     style: 'product-list',
     data: {
-      productList: {
-        product,
+      products: {
+        productList,
         isEmpty: productList.length === 0,
       }
     },
@@ -204,12 +203,8 @@ router.get('/product-edit', function (req, res) {
 
 router.post('/product-edit', function (req, res) {
   const id = Number(req.body.id)
-  const name = req.body.name
-  const price = Number(req.body.price)
-  const description =  req.body.description
-  
+   
   const product = Product.updateById (id)
-
  
   if (product) {
     res.render('alert', {

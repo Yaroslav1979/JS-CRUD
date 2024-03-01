@@ -30,8 +30,6 @@
 .form__button {
   display: flex;
   justify-content: center;
-  text-decoration: none;
-  border: 1px solid #ddd;
   padding: 8px;
   border-radius: 20px;
   background-color: blue;
@@ -43,6 +41,7 @@
 }
 .form__btn {
   color: white;
+  text-decoration: none;
 }
 .form__explain {
   font-size: 12px;
