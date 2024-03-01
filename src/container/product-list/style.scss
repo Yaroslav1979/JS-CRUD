@@ -10,16 +10,20 @@
     font-weight: 700;
     margin: 20px 0;
 }
-
 .product__cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin: 20px;
 }
-
 main {
    display: flex; 
    flex-direction: column;
    gap: s.space(10);
+}
+
+mark {
+    margin-left: 10%;
+    background-color: transparent;
+    font-size: 24px;
 }

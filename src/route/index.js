@@ -16,20 +16,21 @@ class Product {
     this.description = description    
     this.id = Math.floor(Math.random() * 10000) //генруємо випадкове id
     this.createDate = () => {
-      this.date = new Date().toISOString()};
+    this.date = new Date().toISOString()
+  };
     
 
   }
 //Статичний метод для створення об'єкту Product і додавання його до списку #list
-  static create(name, price, description, id) {
-    const newProduct = new Product(name, price, description, id)
-    this.#list.push(newProduct)
-    return newProduct
-  }
+  // static create(name, price, description, id) {
+  //   const newProduct = new Product(name, price, description, id)
+  //   this.#list.push(newProduct)
+  //   return newProduct
+  // }
 
   //Статичний метод ля отримання всього списку продуктів
   static getList() {
-    return this.#list.reverse()
+    return this.#list
   }
 
   checkId = (id) => this.id === id
@@ -42,25 +43,6 @@ class Product {
     return this.#list.find((product) => product.id === id)
   }
 
-  static updateById = (id, data) => {
-    const product = this.getById(id);
-    const {name} = data
-    if (product) {
-      if(name) {
-        product.name = name
-      }   
-        return true
-      } else {
-        return false
-      }
-      }
-
-  static update = (name, {product} ) => {
-    if (name) {      
-       product.name = name      
-     }
-   }
-
   static deleteById = (id) => {
     const index = this.#list.findIndex(
       (product) => product.id === id,
@@ -72,22 +54,58 @@ class Product {
         return false
       }
   }
+
+  // static updateById = (id, data) => {
+  //   const product = this.getById(id);
+  //   const {name} = data
+  //   if (product) {
+  //     if(name) {
+  //       product.name = name
+  //     }   
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //     }
+
+      static updateById = (id, data) => {
+        const productIndex = this.#list.findIndex((product) => product.id === id);
+      
+        if (productIndex !== -1) {
+          const product = this.#list[productIndex];
+          const { name } = data;
+      
+          if (name) {
+            product.name = name;
+          }
+      
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+  static update = (name, {product} ) => {
+    if (name) {      
+       product.name = name      
+     }
+   }  
 }
 
-Product.create (
-  "Спортивні кросівки",
-  "1200",
-  "Зручні та стильні кросівки для активного способу життя",
-)
+// Product.add(
+//   "Спортивні кросівки",
+//   "1200",
+//   "Зручні та стильні кросівки для активного способу життя",
+// )
 
 //============================================================
 
 
 router.get('/', function (req, res) {
 
-  res.render('product-list', {
+  res.render('product-create', {
 
-     style: 'product-list',
+     style: 'product-create',
 
     data: {},
   })
@@ -98,13 +116,6 @@ router.get('/', function (req, res) {
 router.get('/product-create', function (req, res) {
 
   const list = Product.getList()
-
-  // const id = Number(req.query.id)
-  // const name = req.body.name
-  // const price = Number(req.body.price)
-  // const description =  req.body.description
-  
-  // const product = Product.create(name, price, description, id)
   
   res.render('product-create', {
     style: 'product-create',
@@ -119,8 +130,6 @@ router.get('/product-create', function (req, res) {
   router.post('/product-create', function (req, res) {
     const id = Number(req.body.id)
     const {name, price, description} = req.body;
-    // const price = Number(req.body.price);
-    // const description = req.body.description;
     const product = new Product(name, price, description)
     Product.add(product)
     console.log(Product.getList())
@@ -136,8 +145,7 @@ router.get('/product-create', function (req, res) {
       });
     }
     
-    
-    if (product) {
+      if (product) {
       return res.render('alert', {
         style: 'alert',
         data: {
@@ -158,8 +166,6 @@ router.get('/product-create', function (req, res) {
       });
     }
   });
-
-//------------------------------------------------------
 
 
 //------------------------------------------------
@@ -183,50 +189,54 @@ router.get('/product-list', function (req, res) {
 })
 //----------------------------------------------------------
 router.get('/product-edit', function (req, res) {
-  const id = Number(req.query.id)
-  // const name = req.body.name
-  // const price = Number(req.body.price)
-  // const description =  req.body.description
-  
-  const product = Product.getById(id)
+  const id = Number(req.query.id);
+  const product = Product.getById(id);
 
- 
-  res.render('product-edit', {
-    style: 'product-edit',
-    data: {
-      product,
-    },
-  })  
-})
+  if (product) {
+    res.render('product-edit', {
+      style: 'product-edit',
+      data: {
+        product,
+      },
+    });
+  } else {
+    res.render('alert', {
+      style: 'alert',
+      data: {
+        message: 'Помилка',
+        info: 'Товар з таким ID не знайдено',
+        link: '/product-list', 
+      },
+    });
+  }
+});
 
 //--------------------------------------------
 
 router.post('/product-edit', function (req, res) {
-  const id = Number(req.body.id)
-   
-  const product = Product.updateById (id)
- 
-  if (product) {
+  const id = Number(req.body.id);
+  const updatedProduct = Product.updateById(id, req.body);
+
+  if (updatedProduct) {
     res.render('alert', {
-     
       style: 'alert',
       data: {
-       message: 'Успiшно!',
-       info: 'Товар оновлено',
-       link: '/product-list'
+        message: 'Успiшно!',
+        info: 'Товар оновлено',
+        link: '/product-list'
       }
-    })
-   } else {
-     return res.render('alert', {
-       style: 'alert',
-       data: {
-         message: 'Помилка',
-         info: 'Не вдалося оновити товар',
-         link: '/product-edit',
-       }
-     });
-   }
-})
+    });
+  } else {
+    res.render('product-edit', {
+      style: 'product-edit',
+      data: {
+        message: 'Помилка',
+        info: 'Не вдалося оновити товар',
+        link: '/product-edit?id=' + id,
+      },
+    });
+  }
+});
 
 //------------------------------------------
 router.get('/product-delete', function (req, res) {

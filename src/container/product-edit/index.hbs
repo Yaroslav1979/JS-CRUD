@@ -1,6 +1,7 @@
 
 <main>
-  <section>    
+  <section>
+    {{#with data}}    
     <h1 class="title title--center">Редагування товару</h1>
     <form method="POST" action="/product-edit">
         <h2 class="title--small">Інформація про товар:</h2>
@@ -15,7 +16,7 @@
           </div>
            <div class="form__field">
             <label for="id" class="form__label">ID:</label>
-            <input type="number" name="id" class="form__input" value="{{product.id}}">
+            <input type="number" name="id" class="form__input" value="{{product.id}}" readonly>
           </div>
           </div>
           <div class="form__field">
@@ -26,13 +27,16 @@
           <div class="form__content">           
               <button class="form__button" type="submit"> 
              <a href="/product-edit?id={{product.id}}" class="form__btn">
-             Зберегти оновлення</a></button>            
+             Зберегти оновлення
+             </a>
+             </button>            
              <button class="form__button form__button--red">
               <a href="/product-delete?id={{product.id}}" class="form__btn">
              Видалити товар </a>
              </button>           
           </div>
-      </form>     
+      </form> 
+      {{/with}}    
   </section>
 </main>
 

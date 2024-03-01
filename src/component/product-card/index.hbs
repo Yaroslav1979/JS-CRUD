@@ -1,8 +1,8 @@
 {{#with data.products}}
 
 {{#if isEmpty}} 
-<mark> Пустий </mark>
-
+<mark> Порожній </mark>
+{{else}}
     {{#each productList}}
     <div class="product-card">
     <h2 class="product-card__title">{{name}}</h2>
@@ -14,7 +14,7 @@
       <button class="product-card__button">
         <a href="/product-edit?id={{id}}" 
       >
-        {{>button text="Редагувати"}}
+        <button class="button">Редагувати</button>
       </a></button>
     </div> 
     </div>                         

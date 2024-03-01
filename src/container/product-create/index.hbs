@@ -14,17 +14,17 @@
 
           <div class="form__field">
             <label for="name" class="form__label">Назва товару:</label>
-            <input type="name" name="name" class="form__input">
+            <input type="text" name="name" class="form__input">
           </div>
 
           <div class="form__field">
             <label for="price" class="form__label">Ціна:</label>
-            <input type="price" name="price" class="form__input">
+            <input type="text" name="price" class="form__input">
           </div>
 
           <div class="form__field">
             <label for="description" class="form__label">Короткий опис товару:</label>
-            <input type="description" name="description" class="form__input">
+            <input type="text" name="description" class="form__input">
           </div>
 
           <em class="form__explain">Відображається у картці товару</em>
@@ -37,52 +37,7 @@
    
   </section>
 
-   {{!-- <section>
-    <div class="form">
-      <h1 class="form__title">Список користувачів</h1>
-      <div class="user-list">
-        {{#with data.users}}
-      
-        {{#if isEmpty}}
-          <mark> Пустий</mark>
-          {{else}}
-          <ul >
-            {{#each list}}
-              <li>{{email}} | {{login}} | {{id}} <a href="/user-delete? id={{id}}">(видалити)</a></li>
-
-            {{/each}}
-            </ul>
-          {{/if}}
-          {{/with}}
-      </div>
-    </div>
-  </section>
-
-    <section>
-    <div class="form">
-      <h1 class="form__title">Оновити пошту користувача</h1>
-      <form method="POST" action="/user-update">
-        <div class="form__content">
-
-           <div class="form__field">
-            <label for="id" class="form__label">ID:</label>
-            <input type="id" name="id" class="form__input">
-          </div>
-          <div class="form__field">
-            <label for="email" class="form__label">Нова Email адреса:</label>
-            <input type="email" name="email" class="form__input">
-          </div>
-         
-          <div class="form__field">
-            <label for="password" class="form__label">Пароль входу:</label>
-            <input type="password" name="password" class="form__input">
-          </div>
-          <button class="form__button">Відправити</button>
-        </div>
-      </form>
-    </div>
-  </section> --}}
-
+   
 </main>
 
 
