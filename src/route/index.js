@@ -14,7 +14,7 @@ class Product {
     this.name = name
     this.price = price
     this.description = description    
-    this.id = Math.floor(Math.random() * 10000) //генруємо випадкове id
+    this.id = Math.floor(Math.random() * 10000 + 10000) //генруємо випадкове id
     this.createDate = () => {
     this.date = new Date().toISOString()
   };
@@ -73,10 +73,12 @@ class Product {
       
         if (productIndex !== -1) {
           const product = this.#list[productIndex];
-          const { name } = data;
+          const { name, price, description } = data;
       
-          if (name) {
+          if (name, price, description) {
             product.name = name;
+            product.price = price;
+            product.description = description;
           }
       
           return true;
